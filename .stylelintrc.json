@@ -12,6 +12,7 @@
     "src/vendor/*.css"
   ],
   "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "import-notation": "url",
     "selector-class-pattern": null,
     "property-no-vendor-prefix": null,
