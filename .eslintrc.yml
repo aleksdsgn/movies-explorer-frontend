@@ -12,8 +12,6 @@ parserOptions:
 plugins:
   - react
 rules:
-  no-console: off
-  linebreak-style: 0
   react/react-in-jsx-scope: off
   jsx-a11y/tabindex-no-positive: off
   jsx-a11y/anchor-has-content: off
@@ -22,6 +20,8 @@ rules:
   import/prefer-default-export: off
   react/prop-types: off
   no-underscore-dangle: off
+  no-param-reassign: off
+  class-methods-use-this: off
   max-len: ["error", {
     "code": 120,
     "ignoreComments": true,
@@ -30,4 +30,4 @@ rules:
     "ignoreStrings": true,
     "ignoreTemplateLiterals": true
   }]
-  # no-console: ["error", { allow: ["error"] }]
+  no-console: ["error", { allow: ["error"] }]

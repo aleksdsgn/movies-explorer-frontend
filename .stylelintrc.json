@@ -9,10 +9,11 @@
   "ignoreFiles": [
     "src/images/*",
     "src/vendor/fonts/*",
-    "src/vendor/*.css"
+    "src/vendor/*.css",
+    "public/*"
   ],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "no-empty-source": null,
     "import-notation": "url",
     "selector-class-pattern": null,
     "property-no-vendor-prefix": null,
