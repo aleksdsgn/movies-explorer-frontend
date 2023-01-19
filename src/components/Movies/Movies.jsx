@@ -3,6 +3,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 // import Preloader from '../Preloader/Preloader';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function Movies() {
   return (
@@ -10,6 +11,7 @@ function Movies() {
       <Header />
       <SearchForm />
       {/* <Preloader /> */}
+      <MoviesCardList />
       <Footer />
     </div>
   );

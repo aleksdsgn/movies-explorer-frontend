@@ -111,7 +111,6 @@
   background-color: #2be080;
 }
 
-
 .search-form__checkbox:checked + .search-form__checkbox-label::after {
   transform: translate(14px);
   transition: .2s;
