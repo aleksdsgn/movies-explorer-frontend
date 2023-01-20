@@ -5,7 +5,7 @@ function SearchForm() {
   return (
     <section className="section search-form">
       <form className="search-form__container">
-        <fieldset className="search-form__field">
+        <fieldset className="search-form__field search-form__field-input">
           <div className="search-form__icon" />
           <label className="search-form__input-wrapper" htmlFor="film">
             <input
@@ -22,19 +22,22 @@ function SearchForm() {
             aria-label="Найти фильм"
           />
         </fieldset>
-        {/* <fieldset> */}
-        <div className="search-form__line" />
-        <input
-          className="search-form__checkbox"
-          type="checkbox"
-          id="short-films"
-          name="short-films"
-        />
-        <label className="search-form__checkbox-label" htmlFor="short-films" />
-        <p className="search-form__short-films-text">
-          Короткометражки
-        </p>
-        {/* </fieldset> */}
+        <fieldset className="search-form__field search-form__field-short-films">
+          <div className="search-form__line" />
+          <label className="search-form__checkbox-label" htmlFor="short-films">
+            <input
+              className="search-form__checkbox"
+              type="checkbox"
+              id="short-films"
+              name="short-films"
+              // checked
+            />
+            <span className="search-form__checkbox-switch" />
+          </label>
+          <p className="search-form__short-films-text">
+            Короткометражки
+          </p>
+        </fieldset>
       </form>
       <hr className="line" />
     </section>
