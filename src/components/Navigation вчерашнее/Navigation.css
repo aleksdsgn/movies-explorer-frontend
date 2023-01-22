@@ -1,0 +1,143 @@
+.header__list {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.header__list-item {
+  padding-left: 30px;
+  list-style: none;
+}
+
+.header__link-logged-out {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-decoration: none;
+}
+
+.header__link-logged-in {
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  text-decoration: none;
+}
+
+.header__link-logged-in_active {
+  font-weight: 500;
+}
+
+.header__link_type_home {
+  display: none;
+}
+
+.header__link_type_signup {
+  color: #fff;
+}
+
+.header__link_type_signin {
+  padding: 8px 20px;
+  border-radius: 3px;
+  background-color: #2be080;
+  color: #000;
+}
+
+.header__link_type_profile {
+  padding: 8px 22px;
+  border-radius: 20px;
+  margin-left: 20px;
+  background-color: #f2f2f2;
+}
+
+@media screen and (max-width: 768px) {
+  .header__menu {
+    display: none;
+    /* display: flex; */
+    flex-direction: row-reverse;
+    top: -100%;
+    transition: .3s;
+  }
+
+  .header__menu_active {
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    top: 0;
+    right: 0;
+    width: 520px;
+    height: 100%;
+    background-color: cadetblue;
+    z-index: -1;
+  }
+
+
+
+  .header__list {
+    padding-top: 159px;
+    display: flex;
+    /* visibility: hidden; */
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+  }
+
+
+
+
+  .header__link-logged-in {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .header__link-logged-in_active {
+    padding-bottom: 2px;
+    border-bottom: 2px solid #000;
+  }
+
+  .header__list-item {
+    padding-left: 14px;
+  }
+
+  .header__menu_active .header__list-item {
+    padding-left: 0;
+    padding-top: 28px;
+  }
+
+  .header__list-item:last-child {
+    margin-top: auto;
+    padding-bottom: 90px;
+  }
+
+  .header__link_type_home {
+    display: block;
+  }
+
+  .header__link_type_signin {
+    padding: 7px 12px;
+  }
+
+  .header__link_type_profile {
+    margin-left: 0;
+  }
+
+}
+
+@media screen and (max-width: 520px) {
+  .header__menu_active {
+    width: 100%;
+  }
+
+  .header__menu_active .header__list-item {
+    padding-top: 24px;
+  }
+
+  .header__list {
+    padding-top: 144px;
+  }
+
+  .header__list-item:last-child {
+    padding-bottom: 46px;
+  }
+}
