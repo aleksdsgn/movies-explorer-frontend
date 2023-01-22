@@ -6,7 +6,7 @@ function Header() {
   return (
   // залогинен header__logged-in
   // незалогинен
-    <header className="section header header__logged-in">
+    <header className="section header">
       <a className="header__logo link-animation" href="/">
         <img
           className="header__img"

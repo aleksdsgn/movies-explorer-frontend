@@ -5,7 +5,7 @@ function Navigation() {
   // незалогинен
   // залогинен
     <div className="navigation">
-      <nav className="navigation__menu-logged-out">
+      <nav className="navigation__menu-logged-out navigation__menu_active">
         <ul className="navigation__list">
           <li className="navigation__list-item">
             <a
@@ -33,12 +33,12 @@ function Navigation() {
       </nav>
 
       {/* <div className="navigation__burger link-animation navigation__burger_active"> */}
-      <div className="navigation__burger link-animation navigation__burger_active">
+      <div className="navigation__burger_active link-animation">
         <span className="navigation__burger-span" />
       </div>
 
       {/* <nav className="navigation__menu-logged-in navigation__menu_active"> */}
-      <nav className="navigation__menu-logged-in navigation__menu_active">
+      {/* <nav className="navigation__menu-logged-in navigation__menu-logged-in_active">
         <ul className="navigation__list">
           <li className="navigation__list-item">
             <a
@@ -87,7 +87,7 @@ function Navigation() {
           </li>
         </ul>
       </nav>
-      <div className="navigation__cover navigation__cover_active" />
+      <div className="navigation__cover navigation__cover_active" /> */}
     </div>
   );
 }

@@ -28,6 +28,7 @@
 .promo__button {
   border-color: rgba(255 255 255 / 60%);
   color: #fff;
+  cursor: pointer;
 }
 
 .promo__img {
