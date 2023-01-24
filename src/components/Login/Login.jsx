@@ -6,7 +6,7 @@ function Register() {
   return (
     <section className="sign">
 
-      <form className="sign__form" name="register">
+      <form className="sign__form" name="login">
         <fieldset className="sign__fieldset">
           <Link to="/" className="sign__header link-animation" aria-label="На главную">
             <img

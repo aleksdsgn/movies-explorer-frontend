@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-// import Header from '../Header/Header';
+import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -13,7 +13,7 @@ import NotFound from '../NotFound/NotFound';
 function App() {
   return (
     <div className="app">
-      {/* <Header /> */}
+      <Header />
 
       <Routes>
         <Route path="/" element={<Main />} />
