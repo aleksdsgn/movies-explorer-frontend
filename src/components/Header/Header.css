@@ -4,10 +4,13 @@
   justify-content: space-between;
   padding-top: 18px;
   padding-bottom: 18px;
+}
+
+.header_theme_black {
   background-color: #073042;
 }
 
-.header__logged-in {
+.header_theme_light {
   background-color: #fff;
 }
 

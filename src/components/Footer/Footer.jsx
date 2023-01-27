@@ -1,7 +1,13 @@
+import { useLocation } from 'react-router-dom';
 import './Footer.css';
 
 function Footer() {
+  const { pathname } = useLocation();
+  const visible = pathname === '/' || pathname === '/movies' || pathname === '/saved-movies';
+
   return (
+    (visible)
+    && (
     <footer className="section footer">
       <h3 className="footer__text footer__title">
         Учебный проект Яндекс.Практикум х BeatFilm.
@@ -34,6 +40,7 @@ function Footer() {
         </ul>
       </div>
     </footer>
+    )
   );
 }
 

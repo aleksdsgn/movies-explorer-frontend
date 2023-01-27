@@ -1,6 +1,6 @@
 import './Profile.css';
 
-function Profile() {
+function Profile({ loggedOut }) {
   return (
     <section className="profile">
 
@@ -50,8 +50,10 @@ function Profile() {
 
           <button
             className="profile__button profile__button_type_logout link-animation"
-            type="submit"
+            // type="submit"
             aria-label="Выйти из аккаунта"
+            type="button"
+            onClick={loggedOut}
           >
             Выйти из аккаунта
           </button>

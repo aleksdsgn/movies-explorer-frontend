@@ -45,12 +45,22 @@
   cursor: pointer;
 }
 
+.movies-card__button_type_favorite {
+  background-image: url('../../images/favorite-enabled.svg');
+}
+
 .movies-card__button_type_favorite-disabled {
   background-image: url('../../images/favorite-disabled.svg');
 }
 
-.movies-card__button_type_favorite-enabled {
-  background-image: url('../../images/favorite-enabled.svg');
+.movies-card__button_type_delete {
+  background-image: url('../../images/delete.svg');
+  transition: .2s;
+}
+
+.movies-card__button_type_delete:hover {
+  transform: rotate(180deg);
+  transition: .5s;
 }
 
 .movies-card__link-image {

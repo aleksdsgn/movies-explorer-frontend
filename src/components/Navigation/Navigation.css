@@ -1,21 +1,9 @@
-.navigation__menu-logged-out {
-  display: none;
-}
-
-.navigation__menu-logged-in {
-  display: none;
-}
-
-.navigation__burger {
-  display: none;
-}
-
-.navigation__cover {
-  display: none;
-}
-
-.navigation__menu_active {
+.navigation_enable {
   display: block;
+}
+
+.navigation_disable {
+  display: none;
 }
 
 .navigation__list {
@@ -26,34 +14,15 @@
 }
 
 .navigation__list-item {
+  padding-left: 30px;
   list-style: none;
 }
 
-.navigation__menu-logged-out .navigation__list-item {
-  padding-left: 30px;
-}
-
-.navigation__link-logged-out {
+.navigation__link {
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
   text-decoration: none;
-}
-
-.navigation__link-logged-in {
-  color: #000;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 18px;
-  text-decoration: none;
-}
-
-.navigation__link-logged-in_active {
-  font-weight: 500;
-}
-
-.navigation__menu-logged-in .navigation__list-item {
-  padding-left: 20px;
 }
 
 .navigation__link_type_signup {
@@ -68,162 +37,12 @@
   color: #000;
 }
 
-.navigation__link_type_home {
-  display: none;
-}
-
-.navigation__link_type_profile {
-  padding: 8px 22px;
-  border-radius: 20px;
-  margin-left: 20px;
-  background-color: #f2f2f2;
-}
-
-@media screen and (max-width: 768px) {
-  .navigation__burger {
-    position: absolute;
-    z-index: 2;
-    top: 26px;
-    right: 38px;
-    display: block;
-    width: 28px;
-    height: 23px;
-    cursor: pointer;
-  }
-
-  .navigation__burger_active {
-    top: 29px;
-    right: 29px;
-  }
-
-  .navigation__burger-span {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: #000;
-    content: '';
-    transition: .3s;
-  }
-
-  .navigation__burger::before,
-  .navigation__burger::after {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: #000;
-    content: '';
-    transition: .3s;
-  }
-
-  .navigation__burger::before {
-    top: 0;
-  }
-
-  .navigation__burger::after {
-    bottom: 0;
-  }
-
-  .navigation__burger_active::before {
-    top: 10px;
-    transform: rotate(45deg);
-  }
-
-  .navigation__burger_active::after {
-    bottom: 10px;
-    transform: rotate(-45deg);
-  }
-
-  .navigation__burger_active .navigation__burger-span {
-    transform: scale(0);
-  }
-
-  .navigation__menu-logged-in_active {
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    right: 0;
-    display: flex;
-    width: 520px;
-    height: 100%;
-    justify-content: center;
-    background-color: #fff;
-  }
-
-  .navigation__cover_active {
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0 0 0 / 30%);
-    transition: visibility .3s, opacity .3s;
-  }
-
-  .navigation__link_type_home {
-    display: block;
-  }
-
-  .navigation__menu-logged-in .navigation__list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 159px;
-  }
-
-  .navigation__link-logged-in {
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 22px;
-  }
-
-  .navigation__link-logged-in_active {
-    padding-bottom: 2px;
-    border-bottom: 2px solid #000;
-  }
-
-  .navigation__menu-logged-in_active .navigation__list-item {
-    padding-top: 28px;
-    padding-left: 0;
-  }
-
-  .navigation__menu-logged-in_active .navigation__list-item:last-child {
-    padding-bottom: 90px;
-    margin-top: auto;
-  }
-
-  .navigation__link_type_profile {
-    margin-left: 0;
-  }
-}
-
-@media screen and (max-width: 520px) {
-  .navigation__menu-logged-in_active {
-    width: 100%;
-  }
-
-  .navigation__menu-logged-in_active .navigation__list-item {
-    padding-top: 24px;
-  }
-
-  .navigation__menu-logged-in_active .navigation__list {
-    padding-top: 144px;
-  }
-
-  .navigation__menu-logged-in_active .navigation__list-item:last-child {
-    padding-bottom: 46px;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .navigation__menu-logged-out .navigation__list-item {
+@media screen and (max-width: 400px) {
+  .navigation__list-item {
     padding-left: 14px;
   }
 
-  .navigation__link-logged-out {
+  .navigation__link {
     font-size: 10px;
   }
 

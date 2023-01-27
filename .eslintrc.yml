@@ -12,6 +12,7 @@ parserOptions:
 plugins:
   - react
 rules:
+  no-console: off
   react/react-in-jsx-scope: off
   jsx-a11y/tabindex-no-positive: off
   jsx-a11y/anchor-has-content: off
@@ -30,4 +31,4 @@ rules:
     "ignoreStrings": true,
     "ignoreTemplateLiterals": true
   }]
-  no-console: ["error", { allow: ["error"] }]
+  # no-console: ["error", { allow: ["error"] }]

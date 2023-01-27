@@ -1,5 +1,7 @@
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+// import { useState } from 'react';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -8,24 +10,41 @@ import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
-// import Footer from '../Footer/Footer';
+import Footer from '../Footer/Footer';
 
 function App() {
+  const navigate = useNavigate();
+
+  // захардкодил вход в аккаунт
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const handleLoggedIn = () => {
+    setLoggedIn(true);
+    navigate('/movies');
+  };
+
+  const handleLoggedOut = () => {
+    setLoggedIn(false);
+    navigate('/');
+  };
+
   return (
     <div className="app">
-      <Header />
+      <Header
+        loggedIn={loggedIn}
+      />
 
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/saved-movies" element={<SavedMovies />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/signin" element={<Login />} />
-        <Route path="/signup" element={<Register />} />
+        <Route path="/profile" element={<Profile loggedOut={handleLoggedOut} />} />
+        <Route path="/signin" element={<Login loggedIn={handleLoggedIn} />} />
+        <Route path="/signup" element={<Register loggedIn={handleLoggedIn} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './Register.css';
 import logo from '../../images/logo.svg';
 
-function Register() {
+function Register({ loggedIn }) {
   return (
     <section className="sign">
 
@@ -22,7 +22,7 @@ function Register() {
           <label className="sign__form-label" htmlFor="name">
             Имя
             <input
-              required
+              // required
               className="sign__form-input"
               type="text"
               placeholder="Ваше имя"
@@ -36,7 +36,7 @@ function Register() {
           <label className="sign__form-label" htmlFor="email">
             E-mail
             <input
-              required
+              // required
               className="sign__form-input sign__form-input_type_error"
               type="email"
               placeholder="Ваш e-mail"
@@ -50,7 +50,7 @@ function Register() {
           <label className="sign__form-label" htmlFor="password">
             Пароль
             <input
-              required
+              // required
               className="sign__form-input sign__form-input_type_error"
               type="password"
               placeholder="Ваш пароль"
@@ -65,8 +65,10 @@ function Register() {
         <fieldset className="sign__fieldset">
           <button
             className="sign__form-button link-animation"
-            type="submit"
+            // type="submit"
+            type="button"
             aria-label="Зарегистрироваться"
+            onClick={loggedIn}
           >
             Зарегистрироваться
           </button>

@@ -1,7 +1,24 @@
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 import thumbnail from '../../images/thumbnail.jpg';
 
 function MoviesCard() {
+  const { pathname } = useLocation();
+
+  // вид кнопки в зависимости от роута
+  const typeButton = pathname === '/saved-movies' ? 'movies-card__button_type_delete' : 'movies-card__button_type_favorite';
+
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  // переключатель кнопки сохранить
+  const toggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+  };
+
+  // изменение внешнего вида кнопки "сохранить"
+  const favoriteEnabled = isFavorite ? 'movies-card__button_type_favorite-enabled' : 'movies-card__button_type_favorite-disabled';
+
   return (
     <article className="movies-card">
       <div className="movies-card__container">
@@ -10,9 +27,10 @@ function MoviesCard() {
           <p className="movies-card__duration">1ч 47м</p>
         </div>
         <button
-          className="movies-card__button .movies-card__button_type_favorite-disabled movies-card__button_type_favorite-enabled link-animation"
+          className={`movies-card__button ${typeButton} ${favoriteEnabled} link-animation`}
           type="button"
           aria-label="Сохранить"
+          onClick={toggleFavorite}
         />
       </div>
       <a className="movies-card__link-image link-animation">
