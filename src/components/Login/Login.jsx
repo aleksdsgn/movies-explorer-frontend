@@ -10,7 +10,7 @@ function Login({ loggedIn }) {
         <fieldset className="sign__fieldset">
           <Link to="/" className="sign__header link-animation" aria-label="На главную">
             <img
-              className="header__img"
+              className="sign__img"
               src={logo}
               alt="логотип"
             />

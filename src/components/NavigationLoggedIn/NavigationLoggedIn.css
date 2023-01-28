@@ -46,9 +46,13 @@
 }
 
 @media screen and (max-width: 768px) {
+  .navigation-logged-in__menu {
+    display: none;
+  }
+
   .navigation-logged-in__menu_open {
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     top: 0;
     right: 0;
     display: flex;
@@ -57,10 +61,6 @@
     height: 100vh;
     justify-content: center;
     background-color: #fff;
-  }
-
-  .navigation-logged-in__menu_close {
-    display: none;
   }
 
   .navigation-logged-in__list {
@@ -109,7 +109,7 @@
 
   .navigation-logged-in__burger {
     position: absolute;
-    z-index: 2;
+    z-index: 3;
     top: 26px;
     right: 38px;
     display: block;

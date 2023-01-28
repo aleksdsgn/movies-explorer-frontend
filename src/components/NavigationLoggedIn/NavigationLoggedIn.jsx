@@ -14,7 +14,7 @@ function NavigationLoggedIn() {
   const colorBurgerSpan = pathname === '/' ? 'navigation-logged-in__burger-span_color_promo-page' : '';
 
   // бургер-меню
-  const [isBurgerOpen, setIsBurgerOpen] = useState(true);
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const toggleBurger = () => {
     setIsBurgerOpen(!isBurgerOpen);
   };
@@ -40,7 +40,7 @@ function NavigationLoggedIn() {
           <span className={`navigation-logged-in__burger-span ${colorBurgerSpan}`} />
         </button>
 
-        <nav className={isBurgerOpen ? 'navigation-logged-in__menu_open' : 'navigation-logged-in__menu_close'}>
+        <nav className={`navigation-logged-in__menu ${isBurgerOpen ? 'navigation-logged-in__menu_open' : ''}`}>
 
           <ul className="navigation-logged-in__list">
             <li className="navigation-logged-in__list-item">

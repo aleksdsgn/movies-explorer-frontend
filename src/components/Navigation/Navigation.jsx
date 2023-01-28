@@ -3,9 +3,10 @@ import './Navigation.css';
 
 function Navigation() {
   const { pathname } = useLocation();
+  const disableNavigation = pathname === '/' ? '' : 'navigation_disabled';
 
   return (
-    <nav className={pathname === '/' ? 'navigation_enable' : 'navigation_disable'}>
+    <nav className={`navigation ${disableNavigation}`}>
       <ul className="navigation__list">
         <li className="navigation__list-item">
           <Link

@@ -4,7 +4,7 @@ import promoImg from '../../../images/promo.svg';
 function Promo() {
   return (
     <section className="section promo">
-      <div className="promo_container">
+      <div className="promo-container">
         <h1 className="promo__title">
           Учебный проект студента факультета Веб‑разработки.
         </h1>

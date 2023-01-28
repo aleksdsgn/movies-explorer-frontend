@@ -1,8 +1,8 @@
-.navigation_enable {
+.navigation {
   display: block;
 }
 
-.navigation_disable {
+.navigation_disabled {
   display: none;
 }
 

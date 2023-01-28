@@ -3,7 +3,7 @@ import './SearchForm.css';
 
 function SearchForm() {
   return (
-    <section className="section search-form">
+    <div className="section search-form">
       <form className="search-form__container">
         <fieldset className="search-form__field search-form__field-input">
           <div className="search-form__icon" />
@@ -14,10 +14,11 @@ function SearchForm() {
               placeholder="Фильм"
               id="film"
               name="film"
+              required
             />
           </label>
           <button
-            className="search-form__submit"
+            className="search-form__submit link-animation"
             type="submit"
             aria-label="Найти фильм"
           />
@@ -40,7 +41,7 @@ function SearchForm() {
         </fieldset>
       </form>
       <hr className="line" />
-    </section>
+    </div>
   );
 }
 

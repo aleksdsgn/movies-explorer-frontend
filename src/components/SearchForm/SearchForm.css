@@ -76,7 +76,8 @@
 
 .search-form__input:focus-visible {
   background-color: transparent;
-  outline: none;
+  outline-color: rgb(52 86 243 / 30%);;
+  outline-offset: 5px;
 }
 
 .search-form__line {
