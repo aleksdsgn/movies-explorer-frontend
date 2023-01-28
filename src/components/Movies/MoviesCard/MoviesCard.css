@@ -46,15 +46,15 @@
 }
 
 .movies-card__button_type_favorite {
-  background-image: url('../../images/favorite-enabled.svg');
+  background-image: url('../../../images/favorite-enabled.svg');
 }
 
 .movies-card__button_type_favorite-disabled {
-  background-image: url('../../images/favorite-disabled.svg');
+  background-image: url('../../../images/favorite-disabled.svg');
 }
 
 .movies-card__button_type_delete {
-  background-image: url('../../images/delete.svg');
+  background-image: url('../../../images/delete.svg');
   transition: .2s;
 }
 

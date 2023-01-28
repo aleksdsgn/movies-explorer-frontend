@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
-import thumbnail from '../../images/thumbnail.jpg';
+import thumbnail from '../../../images/thumbnail.jpg';
 
 function MoviesCard() {
   const { pathname } = useLocation();
