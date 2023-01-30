@@ -11,10 +11,11 @@ class MoviesApi {
     return Promise.reject(new Error(`Ошибка: ${res.status}`));
   }
 
-  getMovies() {
-    return fetch(`${this._url}`, {
+  async getMovies() {
+    const res = await fetch(`${this._url}`, {
       headers: this._headers,
-    }).then(this._handleResponse);
+    });
+    return this._handleResponse(res);
   }
 }
 
