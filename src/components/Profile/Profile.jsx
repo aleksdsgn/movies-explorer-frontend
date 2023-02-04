@@ -1,76 +1,44 @@
 import { useState, useEffect, useContext } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Profile.css';
-import useFormValidation from '../../hooks/useFormValidation';
 
 function Profile({
   onUpdateUser,
-  statusErrorProfile,
+  // statusErrorProfile,
   handleLogout,
 }) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
   // подписка на контекст
   const currentUser = useContext(CurrentUserContext);
-  // console.log('Что в currentUser:', currentUser);
-  // обновлена ли информация пользователя
-  const [isUserInfoEdited, setIsUserInfoEdited] = useState(false);
 
-  // передача данных в хук для валидации формы
-  const {
-    values, errors, isValid, handleChange, resetFrom,
-  } = useFormValidation();
-
-  // значения в инпутах
-  const { name, email } = values;
-
-  // содержимое сообщения об ошибке api в форме
-  const [formError, setFormError] = useState('');
-
-  // показ сообщений при ошибках на сервере
-  function handleApiStatusErrors() {
-    if (statusErrorProfile) {
-      switch (statusErrorProfile) {
-        case 200:
-          setFormError('Информация успешно обновлена');
-          break;
-        case 409:
-          setFormError('Пользователь с таким email уже есть');
-          break;
-        case 500:
-          setFormError('Ошибка на сервере. Иногда такое бывает :( Попробуйте позже');
-          break;
-        default:
-          setFormError('Ошибочка вышла. Со всеми бывает :( Попробуйте позже');
-          break;
-      }
-    }
-  }
-
-  // установка данных текущего пользователя при загрузке страницы
+  // Подстановка в инпуты загруженных данных пользователя из API
   useEffect(() => {
-    values.name = currentUser.name;
-    values.email = currentUser.email;
-  }, [currentUser.name, currentUser.email]);
+    setName(currentUser.name);
+    setEmail(currentUser.email);
+  }, [currentUser]);
 
-  // подписка на обновление контекста
-  useEffect(() => {
-    setIsUserInfoEdited((values.name !== currentUser.name) || (values.email !== currentUser.email));
-  }, [values.name, values.email]);
+  // Обработчик изменения значения в инпуте имени
+  const handleChangeName = (e) => {
+    setName(e.target.value);
+  };
 
-  // проверка наличия ошибок из api
-  useEffect(() => {
-    handleApiStatusErrors();
-  }, [statusErrorProfile]);
+  // Обработчик изменения значения в инпуте описания
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
 
-  // обработка сабмита формы
+  // Обработчик сабмита
   const handleSubmit = (e) => {
+    // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
-    if (isValid) {
-      // передача во внешний обработчик
-      onUpdateUser(name, email);
-      console.log('во время сабмита currentUser:', currentUser.name, currentUser.email);
-      console.log('во время сабмита name, email:', name, email);
-      resetFrom();
-    }
+    console.log('Передаю во внешний обработчик:', name, email);
+    // Передаём значения управляемых компонентов во внешний обработчик
+    onUpdateUser({
+      name,
+      email,
+    });
   };
 
   return (
@@ -79,18 +47,13 @@ function Profile({
       <form className="profile__form" name="profile" onSubmit={handleSubmit}>
 
         <fieldset className="profile__fieldset">
-          <h1 className="profile__title">
-            Привет,
-            {' '}
-            {email}
-            !
-          </h1>
+          <h1 className="profile__title">{`Привет ${name}!`}</h1>
 
           <label className="profile__form-label" htmlFor="name">
             Имя
             <input
               className="profile__form-input"
-              onChange={handleChange}
+              onChange={handleChangeName}
               value={name || ''}
               aria-label="Введите ваше имя"
               id="name"
@@ -101,9 +64,6 @@ function Profile({
               type="text"
               required
             />
-            <span className="sign__form-error sign__form-error_type_input">
-              {errors.name}
-            </span>
           </label>
 
           <hr className="line profile__line" />
@@ -112,7 +72,7 @@ function Profile({
             E-mail
             <input
               className="profile__form-input"
-              onChange={handleChange}
+              onChange={handleChangeEmail}
               value={email || ''}
               aria-label="Введите ваш e-mail"
               id="email"
@@ -122,19 +82,16 @@ function Profile({
               type="email"
               required
             />
-            <span className="sign__form-error sign__form-error_type_input">
-              {errors.email}
-            </span>
           </label>
 
         </fieldset>
 
         <fieldset className="profile__fieldset">
-          <span className="profile__form-error">{formError}</span>
+          {/* <span className="profile__form-error">{formError}</span> */}
           <button
             className="profile__button button-animation"
             // disabled={!isValid}
-            disabled={!isValid || !isUserInfoEdited}
+            // disabled={!isValid || !isUserInfoEdited}
             aria-label="Редактировать профиль"
             type="submit"
           >

@@ -4,14 +4,22 @@ class MainApi {
     this._headers = apiConfig.headers;
   }
 
+  // _handleResponse(res) {
+  //   return res.json().then((data) => {
+  //     // console.log('в handleResponse:', data);
+  //     if (res.ok) {
+  //       return data;
+  //     }
+  //     return Promise.reject(new Error(data.message));
+  //   });
+  // }
+
   _handleResponse(res) {
-    return res.json().then((data) => {
-      console.log('в handleResponse:', data);
-      if (res.ok) {
-        return data;
-      }
-      return Promise.reject(new Error(data.message));
-    });
+    if (res.ok) {
+      return res.json();
+    }
+    // если ошибка, отклоняем промис
+    return Promise.reject(new Error(`Ошибка: ${res.status}`));
   }
 
   // установка токена
@@ -20,71 +28,64 @@ class MainApi {
   }
 
   // регистрация
-  async register(name, email, password) {
-    const res = await fetch(`${this._baseUrl}/signup`, {
+  register(name, email, password) {
+    return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({ name, email, password }),
-    });
-    return this._handleResponse(res);
+    }).then(this._handleResponse);
   }
 
   // авторизация
-  async login(email, password) {
-    const res = await fetch(`${this._baseUrl}/signin`, {
+  login(email, password) {
+    return fetch(`${this._baseUrl}/signin`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({ email, password }),
-    });
-    return this._handleResponse(res);
+    }).then(this._handleResponse);
   }
 
   // запрос данных профиля
-  async getProfileInfo() {
-    const res = await fetch(`${this._baseUrl}/users/me`, {
+  getProfileInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: this._headers,
-    });
-    return this._handleResponse(res);
+    }).then(this._handleResponse);
   }
 
   // запрос сохраненных пользователем фильмов
-  async getSavedMovies() {
-    const res = await fetch(`${this._baseUrl}/movies`, {
+  getSavedMovies() {
+    return fetch(`${this._baseUrl}/movies`, {
       method: 'GET',
       headers: this._headers,
-    });
-    return this._handleResponse(res);
+    }).then(this._handleResponse);
   }
 
   // сохранение отредактированных данных профиля
-  async updateProfileInfo(name, email) {
-    console.log('данные приходящие в MainApi:', name, email);
-    const res = await fetch(`${this._baseUrl}/users/me`, {
+  updateProfileInfo(name, email) {
+    console.log('MainApi updateProfileInfo(name, email):', name, email);
+    return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({ name, email }),
-    });
-    return this._handleResponse(res);
+    }).then(this._handleResponse);
   }
 
   // создание и загрузка новой карточки фильма на сервер
-  async createMovie(data) {
-    const res = await fetch(`${this._baseUrl}/movies`, {
+  createMovie(data) {
+    return fetch(`${this._baseUrl}/movies`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify(data),
-    });
-    return this._handleResponse(res);
+    }).then(this._handleResponse);
   }
 
   // удаление фильма из сохраненных
-  async deleteMovie(id) {
-    const res = await fetch(`${this._baseUrl}/movies/${id}`, {
+  deleteMovie(id) {
+    return fetch(`${this._baseUrl}/movies/${id}`, {
       method: 'DELETE',
       headers: this._headers,
-    });
-    return this._handleResponse(res);
+    }).then(this._handleResponse);
   }
 }
 

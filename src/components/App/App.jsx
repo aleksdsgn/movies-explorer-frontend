@@ -96,11 +96,11 @@ function App() {
 
   // регистрация
   const handleRegister = (userName, userEmail, userPassword) => {
-    console.log('запуск handleRegister');
+    // console.log('запуск handleRegister');
     mainApi
       .register(userName, userEmail, userPassword)
       .then(() => {
-        console.log(userName, userEmail, userPassword);
+        // console.log(userName, userEmail, userPassword);
         handleLogin(userEmail, userPassword);
         // if (res) {
         //   navigate('/signin');
@@ -113,14 +113,14 @@ function App() {
   };
 
   // обработка редактирования данных профиля
-  const handleUpdateUser = (userName, userEmail) => {
-    console.log('Получаю во внеш обработчик в App:', userName, userEmail);
+  const handleUpdateUser = (updatedData) => {
+    console.log('Принимаю в App:', updatedData);
     mainApi
-      .updateProfileInfo(userName, userEmail)
-      .then((userData) => {
-        setCurrentUser(userData);
-        console.log('устанавливаю setCurrentUser:', userData);
+      .updateProfileInfo(updatedData.name, updatedData.email)
+      .then((userInfo) => {
+        setCurrentUser(userInfo);
         setStatusErrorProfile(200);
+        console.log('userInfo в then:', userInfo);
       })
       .catch((err) => {
         setStatusErrorProfile(err);
