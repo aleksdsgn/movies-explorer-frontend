@@ -62,6 +62,15 @@
   outline: none;
 }
 
+.profile__form-error {
+  color: #ff3055;
+  font-weight: 400;
+  padding: 0 0 12px;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+}
+
 .profile__button {
   border: none;
   background: transparent;
@@ -70,6 +79,11 @@
   font-weight: 400;
   line-height: 16px;
   text-align: center;
+}
+
+.profile__button:disabled {
+  color: #989898;
+  cursor: default;
 }
 
 .profile__button_type_logout {

@@ -23,6 +23,10 @@
   transition: .2s;
 }
 
+.button-animation:disabled {
+  opacity: 1;
+}
+
 .section {
   padding: 100px 70px;
 }

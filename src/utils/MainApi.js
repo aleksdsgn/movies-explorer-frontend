@@ -1,14 +1,17 @@
 class MainApi {
   constructor(apiConfig) {
-    this._url = apiConfig.baseUrl;
+    this._baseUrl = apiConfig.baseUrl;
     this._headers = apiConfig.headers;
   }
 
   _handleResponse(res) {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(new Error(`Ошибка: ${res.status}`));
+    return res.json().then((data) => {
+      console.log('в handleResponse:', data);
+      if (res.ok) {
+        return data;
+      }
+      return Promise.reject(new Error(data.message));
+    });
   }
 
   // установка токена
@@ -18,7 +21,7 @@ class MainApi {
 
   // регистрация
   async register(name, email, password) {
-    const res = await fetch(`${this._url}/signup`, {
+    const res = await fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({ name, email, password }),
@@ -28,7 +31,7 @@ class MainApi {
 
   // авторизация
   async login(email, password) {
-    const res = await fetch(`${this._url}/signin`, {
+    const res = await fetch(`${this._baseUrl}/signin`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({ email, password }),
@@ -39,6 +42,7 @@ class MainApi {
   // запрос данных профиля
   async getProfileInfo() {
     const res = await fetch(`${this._baseUrl}/users/me`, {
+      method: 'GET',
       headers: this._headers,
     });
     return this._handleResponse(res);
@@ -47,6 +51,7 @@ class MainApi {
   // запрос сохраненных пользователем фильмов
   async getSavedMovies() {
     const res = await fetch(`${this._baseUrl}/movies`, {
+      method: 'GET',
       headers: this._headers,
     });
     return this._handleResponse(res);
@@ -54,6 +59,7 @@ class MainApi {
 
   // сохранение отредактированных данных профиля
   async updateProfileInfo(name, email) {
+    console.log('данные приходящие в MainApi:', name, email);
     const res = await fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -82,7 +88,7 @@ class MainApi {
   }
 }
 
-export const moviesApi = new MainApi({
+export const mainApi = new MainApi({
   baseUrl: 'http://localhost:3001',
   // baseUrl: 'https://api.movies.aleksdsgn.nomoredomains.club',
   headers: {
