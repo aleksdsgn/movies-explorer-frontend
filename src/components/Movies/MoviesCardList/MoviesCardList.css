@@ -21,7 +21,10 @@
   list-style-type: none;
 }
 
-.movies-cards__nothing {
+.movies-cards__message {
+  max-width: 60%;
+  font-size: 16px;
+  text-align: center;
   color: #a0a0a0;
 }
 
@@ -72,6 +75,10 @@
   .movies-cards__list {
     row-gap: 24px;
   }
+
+  .movies-cards__message_type_api-error {
+    font-size: 14px;
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -82,5 +89,9 @@
 
   .movies-cards__list {
     row-gap: 16px;
+  }
+
+  .movies-cards__message_type_api-error {
+    font-size: 12px;
   }
 }

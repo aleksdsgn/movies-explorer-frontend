@@ -5,6 +5,7 @@ import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Preloader from './Preloader/Preloader';
 import { mainApi } from '../../utils/MainApi';
 import { moviesApi } from '../../utils/MoviesApi';
+import { calcCardsCounter } from '../../utils/cardsCounter';
 
 function Movies() {
   // состояние исходных фильмов
@@ -15,6 +16,17 @@ function Movies() {
   const [isShowPreloader, setIsShowPreloader] = useState(false);
   // состояние выполненого поиска
   const [searchWasDone, setSearchWasDone] = useState(false);
+
+  // показ захардкоженного текста ошибки от сервера
+  const [apiHasError, setApiHasError] = useState(false);
+
+  // счетчик количесва карточек для загрузки
+  const counter = calcCardsCounter();
+  const [cardsCounter, setCardsCounter] = useState(counter.init);
+  const loadMore = () => {
+    const { more } = calcCardsCounter();
+    setCardsCounter(cardsCounter + more);
+  };
 
   const filterMovies = (search) => {
     setSearchWasDone(true);
@@ -46,6 +58,10 @@ function Movies() {
             filter(preparedMovies);
             localStorage.setItem('local-movies', JSON.stringify(preparedMovies));
             setIsShowPreloader(false);
+          })
+          .catch((err) => {
+            console.error(err);
+            setApiHasError(true);
           });
       } else {
         setSourceMovies(localMovies);
@@ -54,6 +70,8 @@ function Movies() {
     } else {
       filter(sourceMovies);
     }
+    const { init } = calcCardsCounter();
+    setCardsCounter(init);
   };
 
   // удаление карточки фильма из сохраненных
@@ -71,6 +89,10 @@ function Movies() {
           return updatedMovies;
         });
         localStorage.removeItem('saved-movies');
+      })
+      .catch((err) => {
+        console.error(err);
+        setApiHasError(true);
       });
   };
 
@@ -105,6 +127,10 @@ function Movies() {
           localStorage.setItem('local-movies', JSON.stringify(updatedMovies));
           return updatedMovies;
         });
+      })
+      .catch((err) => {
+        console.error(err);
+        setApiHasError(true);
       });
   };
 
@@ -121,9 +147,12 @@ function Movies() {
         </div>
         )}
       <MoviesCardList
-        cards={filteredMovies}
+        cards={filteredMovies.filter((_, i) => i < cardsCounter)}
         onClickUpdateMovie={handleClickUpdateMovie}
         searchWasDone={searchWasDone}
+        loadMore={loadMore}
+        hasMore={filteredMovies.length > cardsCounter}
+        apiHasError={apiHasError}
       />
     </main>
   );

@@ -14,6 +14,8 @@ function SavedMovies() {
   const [isShowPreloader, setIsShowPreloader] = useState(false);
   // состояние выполненого поиска
   const [searchWasDone, setSearchWasDone] = useState(false);
+  // показ захардкоженного текста ошибки от сервера
+  const [apiHasError, setApiHasError] = useState(false);
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
@@ -27,6 +29,10 @@ function SavedMovies() {
           setSourceMovies(serverMovies.data);
           setFilteredMovies(serverMovies.data);
           setIsShowPreloader(false);
+        })
+        .catch((err) => {
+          console.error(err);
+          setApiHasError(true);
         });
     } else {
       setSourceMovies(savedMovies);
@@ -59,6 +65,10 @@ function SavedMovies() {
           localStorage.setItem('saved-movies', JSON.stringify(filteredSavedMovies));
           return filteredSavedMovies;
         });
+      })
+      .catch((err) => {
+        console.error(err);
+        setApiHasError(true);
       });
   };
 
@@ -81,6 +91,7 @@ function SavedMovies() {
         cards={filteredMovies}
         onClickUpdateMovie={handleDeleteMovie}
         searchWasDone={searchWasDone}
+        apiHasError={apiHasError}
       />
     </main>
   );
