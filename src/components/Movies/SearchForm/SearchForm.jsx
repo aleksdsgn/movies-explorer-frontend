@@ -1,40 +1,73 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import {
-  useState,
-  // useEffect,
-} from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './SearchForm.css';
 
-function SearchForm() {
-  // содержимое строки поиска
-  const [valueSearch, setValueSearch] = useState('');
-  // валидация формы поиска
-  const [searchIsValid, setSearchIsValid] = useState(false);
+function SearchForm({ filterMovies, required = true, page }) {
+  const [isDisabledButton, setIsDisabledButton] = useState(true);
+  const [error, setError] = useState({
+    name: '',
+    isShorts: '',
+  });
+  const [value, setValue] = useState({
+    name: '',
+    isShorts: false,
+  });
 
-  // обработчик содержимого строки поиска
-  const handleValueSearch = (e) => {
-    // убрать ошибку если есть хотя бы 1 символ
-    if (e.target.value.length > 0) {
-      setSearchIsValid(true);
-      // console.log('Прячу ошибку setShowError(false)');
+  const formRef = useRef(null);
+
+  // Эффект отслеживания состояния поля input поиска
+  useEffect(() => {
+    const searchMovies = JSON.parse(localStorage.getItem('search-movies'));
+    if (searchMovies) {
+      setValue(searchMovies);
+      filterMovies(searchMovies);
     }
+    if (page === 'saved-movies') {
+      filterMovies({ name: '', isShorts: false });
+      setValue({ name: '', isShorts: false });
+    }
+  }, []);
 
-    // запомнить значение поиска
-    setValueSearch(e.target.value);
-    // console.log('Показываю значение поиска', e.target.value);
-    // console.log('Что находится в valueSearch:', valueSearch);
+  const handleChange = (e) => {
+    const {
+      name,
+      value: inputValue,
+      validationMessage,
+    } = e.target;
+    const updatedValue = {
+      ...value,
+      [name]: inputValue,
+    };
+    if (page === 'movies') {
+      localStorage.setItem('search-movies', JSON.stringify(updatedValue));
+    }
+    setValue(updatedValue);
+    setError((state) => ({
+      ...state,
+      [name]: validationMessage,
+    }));
+    setIsDisabledButton(!formRef.current.checkValidity());
   };
 
-  // обработчик сабмита
-  const handleSubmit = (e) => {
-    // отключить перезагрузку страницы
-    e.preventDefault();
-    // console.log('Что находится в valueSearch:', valueSearch, 'и его длину:', valueSearch.length);
-    // проверка количества символов в запросе
-    if (valueSearch.length < 1) {
-      setSearchIsValid(false);
-      // console.log('Показываю ошибку setShowError(true)');
+  const handleCheckbox = (e) => {
+    const {
+      name,
+      checked,
+    } = e.target;
+    const updatedValue = {
+      ...value,
+      [name]: checked,
+    };
+    if (page === 'movies') {
+      localStorage.setItem('search-movies', JSON.stringify(updatedValue));
     }
+    setValue(updatedValue);
+    filterMovies(updatedValue);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    filterMovies(value);
   };
 
   return (
@@ -43,6 +76,8 @@ function SearchForm() {
         className="search-form__container"
         name="search-films"
         onSubmit={handleSubmit}
+        ref={formRef}
+        noValidate
       >
         <fieldset className="search-form__field search-form__field-input">
           <div className="search-form__icon" />
@@ -52,18 +87,18 @@ function SearchForm() {
               type="text"
               placeholder="Фильм"
               id="film"
-              name="film"
-              value={valueSearch}
-              // required
-              onChange={handleValueSearch}
+              name="name"
+              value={value.name}
+              required={required}
+              onChange={handleChange}
             />
           </label>
           <button
-            className={`search-form__submit ${searchIsValid ? 'search-form__submit_active link-animation' : ''}`}
+            className={`search-form__submit ${!isDisabledButton ? 'search-form__submit_active link-animation' : ''}`}
             // className="search-form__submit link-animation"
             type="submit"
             aria-label="Найти фильм"
-            disabled={!searchIsValid}
+            disabled={isDisabledButton}
           />
         </fieldset>
         <fieldset className="search-form__field search-form__field-short-films">
@@ -73,8 +108,9 @@ function SearchForm() {
               className="search-form__checkbox"
               type="checkbox"
               id="short-films"
-              name="short-films"
-              // checked
+              name="isShorts"
+              checked={value.isShorts}
+              onChange={handleCheckbox}
             />
             <span className="search-form__checkbox-switch" />
           </label>
@@ -83,9 +119,8 @@ function SearchForm() {
           </p>
         </fieldset>
       </form>
-      <span className={`search-form__error ${!searchIsValid ? 'search-form__error_active' : ''}`}>
-        Ну хоть одну буковку введите
-        {/* Нужно ввести ключевое слово */}
+      <span className={`search-form__error ${isDisabledButton ? 'search-form__error_active' : ''}`}>
+        {error.name}
       </span>
       <hr className="line search-form__hr-line" />
     </div>

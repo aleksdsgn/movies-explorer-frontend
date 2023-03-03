@@ -1,25 +1,16 @@
 class MainApi {
   constructor(apiConfig) {
-    this._baseUrl = apiConfig.baseUrl;
+    this._url = apiConfig.baseUrl;
     this._headers = apiConfig.headers;
   }
 
-  // _handleResponse(res) {
-  //   return res.json().then((data) => {
-  //     // console.log('в handleResponse:', data);
-  //     if (res.ok) {
-  //       return data;
-  //     }
-  //     return Promise.reject(new Error(data.message));
-  //   });
-  // }
-
   _handleResponse(res) {
-    if (res.ok) {
-      return res.json();
-    }
-    // если ошибка, отклоняем промис
-    return Promise.reject(new Error(`Ошибка: ${res.status}`));
+    return res.json().then((data) => {
+      if (res.ok) {
+        return data;
+      }
+      return Promise.reject(new Error(data.message));
+    });
   }
 
   // установка токена
@@ -29,7 +20,7 @@ class MainApi {
 
   // регистрация
   register(name, email, password) {
-    return fetch(`${this._baseUrl}/signup`, {
+    return fetch(`${this._url}/signup`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({ name, email, password }),
@@ -38,7 +29,7 @@ class MainApi {
 
   // авторизация
   login(email, password) {
-    return fetch(`${this._baseUrl}/signin`, {
+    return fetch(`${this._url}/signin`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({ email, password }),
@@ -47,15 +38,7 @@ class MainApi {
 
   // запрос данных профиля
   getProfileInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      method: 'GET',
-      headers: this._headers,
-    }).then(this._handleResponse);
-  }
-
-  // запрос сохраненных пользователем фильмов
-  getSavedMovies() {
-    return fetch(`${this._baseUrl}/movies`, {
+    return fetch(`${this._url}/users/me`, {
       method: 'GET',
       headers: this._headers,
     }).then(this._handleResponse);
@@ -63,17 +46,24 @@ class MainApi {
 
   // сохранение отредактированных данных профиля
   updateProfileInfo(name, email) {
-    console.log('MainApi updateProfileInfo(name, email):', name, email);
-    return fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({ name, email }),
     }).then(this._handleResponse);
   }
 
+  // запрос сохраненных пользователем фильмов
+  getSavedMovies() {
+    return fetch(`${this._url}/movies`, {
+      method: 'GET',
+      headers: this._headers,
+    }).then(this._handleResponse);
+  }
+
   // создание и загрузка новой карточки фильма на сервер
-  createMovie(data) {
-    return fetch(`${this._baseUrl}/movies`, {
+  saveMovie(data) {
+    return fetch(`${this._url}/movies`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify(data),
@@ -82,7 +72,7 @@ class MainApi {
 
   // удаление фильма из сохраненных
   deleteMovie(id) {
-    return fetch(`${this._baseUrl}/movies/${id}`, {
+    return fetch(`${this._url}/movies/${id}`, {
       method: 'DELETE',
       headers: this._headers,
     }).then(this._handleResponse);
@@ -90,6 +80,7 @@ class MainApi {
 }
 
 export const mainApi = new MainApi({
+  mode: 'no-cors',
   baseUrl: 'http://localhost:3001',
   // baseUrl: 'https://api.movies.aleksdsgn.nomoredomains.club',
   headers: {

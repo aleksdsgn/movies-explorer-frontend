@@ -21,6 +21,10 @@
   list-style-type: none;
 }
 
+.movies-cards__nothing {
+  color: #a0a0a0;
+}
+
 .movies-cards__button-more-wrapper {
   display: flex;
   width: 100%;
