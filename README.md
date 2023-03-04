@@ -21,3 +21,7 @@ https://disk.yandex.ru/d/8e4lKGtgptDQ1w
 * Backend https://api.movies.aleksdsgn.nomoredomains.club
 * Frontend https://movies.aleksdsgn.nomoredomains.club
 * Репезиторий на github https://github.com/aleksdsgn/movies-explorer-api
+
+## Ссылка на пул реквест
+
+https://github.com/aleksdsgn/movies-explorer-frontend/pull/4
