@@ -13,6 +13,7 @@ import Footer from '../Footer/Footer';
 import { mainApi } from '../../utils/MainApi';
 // import { moviesApi } from '../../utils/MoviesApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const navigate = useNavigate();
@@ -152,18 +153,36 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/movies" element={<Movies />} />
-          <Route path="/saved-movies" element={<SavedMovies />} />
+
+          <Route
+            path="/movies"
+            element={(
+              <ProtectedRoute loggedIn={loggedIn}>
+                <Movies />
+              </ProtectedRoute>
+          )}
+          />
+
+          <Route
+            path="/saved-movies"
+            element={(
+              <ProtectedRoute loggedIn={loggedIn}>
+                <SavedMovies />
+              </ProtectedRoute>
+        )}
+          />
 
           <Route
             path="/profile"
             element={(
-              <Profile
+              <ProtectedRoute loggedIn={loggedIn}>
+                <Profile
                 // loggedIn={loggedIn}
-                onUpdateUser={handleUpdateUser}
-                statusErrorProfile={statusErrorProfile}
-                handleLogout={handleLogout}
-              />
+                  onUpdateUser={handleUpdateUser}
+                  statusErrorProfile={statusErrorProfile}
+                  handleLogout={handleLogout}
+                />
+              </ProtectedRoute>
               )}
           />
 
