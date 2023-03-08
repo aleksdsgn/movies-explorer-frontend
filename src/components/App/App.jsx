@@ -143,7 +143,7 @@ function App() {
   const handleLogout = () => {
     localStorage.clear();
     setCurrentUser({});
-    navigate('/signin');
+    navigate('/');
     setLoggedIn(false);
   };
 
