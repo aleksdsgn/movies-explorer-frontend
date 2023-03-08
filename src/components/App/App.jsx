@@ -1,4 +1,9 @@
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import {
+  Route,
+  Routes,
+  useNavigate,
+  Navigate,
+} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './App.css';
 import Header from '../Header/Header';
@@ -44,6 +49,9 @@ function App() {
   const [statusErrorProfile, setStatusErrorProfile] = useState(false);
   const [statusErrorLogin, setStatusErrorLogin] = useState(false);
   const [statusErrorRegister, setStatusErrorRegister] = useState(false);
+
+  // залогинен ли пользователь
+  // const [userIsAuth, setUserIsAuth] = useState(false);
 
   // --------------------------------------------- //
   // -------- Обработчики при авторизации -------- //
@@ -188,22 +196,30 @@ function App() {
 
           <Route
             path="/signin"
-            element={(
-              <Login
-                handleLogin={handleLogin}
-                statusErrorLogin={statusErrorLogin}
-              />
-            )}
+            element={
+              loggedIn ? (
+                <Navigate to="/movies" />
+              ) : (
+                <Login
+                  handleLogin={handleLogin}
+                  statusErrorLogin={statusErrorLogin}
+                />
+              )
+            }
           />
 
           <Route
             path="/signup"
-            element={(
-              <Register
-                handleRegister={handleRegister}
-                statusErrorRegister={statusErrorRegister}
-              />
-            )}
+            element={
+              loggedIn ? (
+                <Navigate to="/movies" />
+              ) : (
+                <Register
+                  handleRegister={handleRegister}
+                  statusErrorRegister={statusErrorRegister}
+                />
+              )
+            }
           />
 
           <Route path="*" element={<NotFound />} />
