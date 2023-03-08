@@ -4,6 +4,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import { mainApi } from '../../../utils/MainApi';
+import { SHORTS_DURATION } from '../../../utils/constants';
 
 function SavedMovies() {
   // состояние исходных фильмов
@@ -44,7 +45,7 @@ function SavedMovies() {
     setSearchWasDone(true);
     setFilteredMovies(sourceMovies.filter((movie) => {
       const isName = movie.nameRU.toLowerCase().includes(search.name.toLowerCase());
-      const isShorts = search.isShorts ? movie.duration <= 40 : true;
+      const isShorts = search.isShorts ? movie.duration <= SHORTS_DURATION : true;
       return isName && isShorts;
     }));
   };
