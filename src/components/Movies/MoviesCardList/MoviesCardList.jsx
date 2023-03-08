@@ -10,7 +10,6 @@ function MoviesCardList({
   hasMore,
   apiHasError,
 }) {
-  console.log(apiHasError);
   const { pathname } = useLocation();
 
   return (

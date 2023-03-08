@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Register.css';
 import logo from '../../images/logo.svg';
@@ -8,9 +7,6 @@ function Register({
   handleRegister,
   statusErrorRegister,
 }) {
-  // содержимое сообщения об ошибке api в форме
-  const [formError, setFormError] = useState('');
-
   // передача данных в хук для валидации формы
   const {
     values, errors, isValid, handleChange,
@@ -18,28 +14,6 @@ function Register({
 
   // значения из полей ввода
   const { name, email, password } = values;
-
-  // показ сообщений при ошибках на сервере
-  function handleApiStatusErrors() {
-    if (statusErrorRegister) {
-      switch (statusErrorRegister) {
-        case 409:
-          setFormError('Пользователь с такой почтой уже зарегистрирован');
-          break;
-        case 500:
-          setFormError('Ошибка на сервере. Иногда такое бывает :( Попробуйте позже');
-          break;
-        default:
-          setFormError('Ошибочка вышла. Со всеми бывает :( Попробуйте позже');
-          break;
-      }
-    }
-  }
-
-  // проверка наличия ошибок из api
-  useEffect(() => {
-    handleApiStatusErrors();
-  }, [statusErrorRegister]);
 
   // обработка сабмита формы
   const handleSubmit = (e) => {
@@ -121,7 +95,7 @@ function Register({
 
         <fieldset className="sign__fieldset">
           <span className="sign__form-error sign__form-error_type_form">
-            {formError}
+            {statusErrorRegister.message}
           </span>
 
           <button

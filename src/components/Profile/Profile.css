@@ -62,13 +62,20 @@
   outline: none;
 }
 
-.profile__form-error {
-  color: #ff3055;
+.profile__form-message {
   font-weight: 400;
   padding: 0 0 12px;
   font-size: 14px;
   line-height: 18px;
   text-align: center;
+}
+
+.profile__form-message_type_success {
+  color: #2be080;
+}
+
+.profile__form-message_type_error {
+  color: #ff3055;
 }
 
 .profile__button {

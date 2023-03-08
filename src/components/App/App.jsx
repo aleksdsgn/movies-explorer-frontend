@@ -108,21 +108,23 @@ function App() {
       })
       .catch((err) => {
         setStatusErrorRegister(err);
-        console.log(`:( Ошибка регистрации: ${err}`);
+        console.log(err);
+        // console.log(err.case);
+        // console.log(err.code);
       });
   };
 
   // обработка редактирования данных профиля
   const handleUpdateUser = (updatedData) => {
-    console.log('Принимаю в App:', updatedData);
     mainApi
       .updateProfileInfo(updatedData.name, updatedData.email)
       .then((userInfo) => {
         setCurrentUser(userInfo);
         setStatusErrorProfile(200);
-        console.log('userInfo в then:', userInfo);
       })
       .catch((err) => {
+        // eslint-disable-next-line no-unused-expressions
+        // err.message;
         setStatusErrorProfile(err);
         console.log(`:( Ошибка обновления информации: ${err}`);
       });
