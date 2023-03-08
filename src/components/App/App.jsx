@@ -9,36 +9,18 @@ import './App.css';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
-import SavedMovies from '../Movies/SavedMovies/SavedMovies';
+import SavedMovies from '../Movies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import Footer from '../Footer/Footer';
 import { mainApi } from '../../utils/MainApi';
-// import { moviesApi } from '../../utils/MoviesApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const navigate = useNavigate();
-
-  // // захардкодил вход в аккаунт
-  // const [loggedIn, setLoggedIn] = useState(false);
-
-  // const handleLoggedIn = () => {
-  //   setLoggedIn(true);
-  //   navigate('/movies');
-  // };
-
-  // const handleLoggedOut = () => {
-  //   setLoggedIn(false);
-  //   navigate('/');
-  // };
-
-  // --------------------------------------------- //
-  // --------- Состояния для авторизации --------- //
-  // --------------------------------------------- //
 
   // начальные данные пользователя
   const [currentUser, setCurrentUser] = useState({});
@@ -49,13 +31,6 @@ function App() {
   const [statusErrorProfile, setStatusErrorProfile] = useState(false);
   const [statusErrorLogin, setStatusErrorLogin] = useState(false);
   const [statusErrorRegister, setStatusErrorRegister] = useState(false);
-
-  // залогинен ли пользователь
-  // const [userIsAuth, setUserIsAuth] = useState(false);
-
-  // --------------------------------------------- //
-  // -------- Обработчики при авторизации -------- //
-  // --------------------------------------------- //
 
   // проверка наличия токена в локальном хранилище
   const tokenCheck = () => {
@@ -76,7 +51,7 @@ function App() {
         })
         .catch((err) => {
           setLoggedIn(false);
-          console.log(`:(  Не валидный токен: ${err}`);
+          console.log(err);
         });
     } else {
       setLoggedIn(false);
@@ -99,27 +74,20 @@ function App() {
       })
       .catch((err) => {
         setStatusErrorLogin(err);
-        console.log(`:( Ошибка авторизации: ${err}`);
+        console.log(err);
       });
   };
 
   // регистрация
   const handleRegister = (userName, userEmail, userPassword) => {
-    // console.log('запуск handleRegister');
     mainApi
       .register(userName, userEmail, userPassword)
       .then(() => {
-        // console.log(userName, userEmail, userPassword);
         handleLogin(userEmail, userPassword);
-        // if (res) {
-        //   navigate('/signin');
-        // }
       })
       .catch((err) => {
         setStatusErrorRegister(err);
         console.log(err);
-        // console.log(err.case);
-        // console.log(err.code);
       });
   };
 
@@ -132,10 +100,8 @@ function App() {
         setStatusErrorProfile(200);
       })
       .catch((err) => {
-        // eslint-disable-next-line no-unused-expressions
-        // err.message;
         setStatusErrorProfile(err);
-        console.log(`:( Ошибка обновления информации: ${err}`);
+        console.log(err);
       });
   };
 
@@ -185,7 +151,6 @@ function App() {
             element={(
               <ProtectedRoute loggedIn={loggedIn}>
                 <Profile
-                // loggedIn={loggedIn}
                   onUpdateUser={handleUpdateUser}
                   statusErrorProfile={statusErrorProfile}
                   handleLogout={handleLogout}

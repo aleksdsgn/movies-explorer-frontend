@@ -2,8 +2,8 @@
 export const MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
 // адрес моей апишки
-export const API_URL = 'http://localhost:3001';
-// export const API_URL = 'https://api.movies.aleksdsgn.nomoredomains.club';
+// export const API_URL = 'http://localhost:3001';
+export const API_URL = 'https://api.movies.aleksdsgn.nomoredomains.club';
 
 // отображение определенного количества карточек
 // размеры экрана Width

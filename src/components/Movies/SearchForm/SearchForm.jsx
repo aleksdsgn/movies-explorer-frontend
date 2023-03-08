@@ -95,7 +95,6 @@ function SearchForm({ filterMovies, required = true, page }) {
           </label>
           <button
             className={`search-form__submit ${!isDisabledButton ? 'search-form__submit_active link-animation' : ''}`}
-            // className="search-form__submit link-animation"
             type="submit"
             aria-label="Найти фильм"
             disabled={isDisabledButton}

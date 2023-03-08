@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import './SavedMovies.css';
-import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Preloader from '../Preloader/Preloader';
-import { mainApi } from '../../../utils/MainApi';
-import { SHORTS_DURATION } from '../../../utils/constants';
+import SearchForm from './SearchForm/SearchForm';
+import MoviesCardList from './MoviesCardList/MoviesCardList';
+import Preloader from './Preloader/Preloader';
+import { mainApi } from '../../utils/MainApi';
+import { SHORTS_DURATION } from '../../utils/constants';
 
 function SavedMovies() {
   // состояние исходных фильмов
